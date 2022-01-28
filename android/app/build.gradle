@@ -170,6 +170,10 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+        compileOptions{                                 //added by Saitoria so if further errors occur it will be deleted
+            sourceCompatibility JavaVersion.VERSION_1_8  
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
     }
 
     // applicationVariants are e.g. debug, release

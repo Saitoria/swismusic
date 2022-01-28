@@ -3,6 +3,11 @@ import {Text,View,Button,StyleSheet,FlatList,Image} from 'react-native';
 import {AudioContext} from '../context/AudioFiles';
 import ListItem from '../components/ListItem';
 import OptionModal from '../components/OptionModal';
+import TrackPlayer, {
+    useTrackPlayerProgress,
+    usePlaybackState,
+    useTrackPlayerEvents,}
+     from 'react-native-track-player';
 
 export default class Audiolist extends Component
 {
@@ -11,10 +16,32 @@ export default class Audiolist extends Component
         super(props);
         this.state = {
             optionModalVisible:false,
+            isPlaying:false,
         };
 
         this.currentItem = {};
     }
+
+    handleAudioPress = async (audio) => {
+        try{
+            await TrackPlayer.setupPlayer();
+            await TrackPlayer.add({
+                id: audio.id,
+                url: audio.path,
+                title:audio.fileName,
+                artist:audio.author,
+                artwork:audio.blured,
+            });
+            const status = await TrackPlayer.play();            
+            TrackPlayer.registerPlaybackService;
+            //console.log(audio);
+            console.log(status);
+        }
+        catch(e)
+        {
+            console.log(e);
+        }
+    };
 
     static contextType = AudioContext;
     render()
@@ -29,7 +56,11 @@ export default class Audiolist extends Component
         <FlatList
             data = {this.context.trackArrayData}
             renderItem = {({item}) => (//<View style={styles.box}><Text style={styles.txt}>{item.fileName}</Text></View>
-                 <ListItem title={item.fileName} duration={item.duration} onOptionPress={()=>{
+                 <ListItem title={item.fileName} duration={item.duration}
+                 onAudioPress={()=>this.handleAudioPress(item)
+                    //this.setState({...this.state, optionModalVisible: true});
+                 }
+                  onOptionPress={()=>{
                      this.setState({...this.state, optionModalVisible: true});
                      this.currentItem = item;
                  }}/> //duration={item.duration}
@@ -39,7 +70,7 @@ export default class Audiolist extends Component
         <OptionModal 
         currentItem = {this.currentItem}
         visible={this.state.optionModalVisible} 
-        onPlayPress={() => console.log('Playing audio')}
+        onPlayPress={() => console.log('Play song')}
         onPlayListPress={() => console.log('Going to playlist')}
         onClose={()=> this.setState({...this.state, optionModalVisible:false})}/>
         </View>

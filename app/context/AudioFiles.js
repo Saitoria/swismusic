@@ -49,7 +49,7 @@ export default class AudioFiles extends Component{
         blured : true, // works only when 'cover' is set to true
         artist : true,
         duration : true, //default : true
-        cover : false, //default : true,
+        cover : true, //default : true,
         genre : true,
         title : true,
         cover : true,

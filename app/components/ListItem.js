@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,StyleSheet,Text,Image} from 'react-native';
+import {View,StyleSheet,Text,Image, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -29,10 +29,11 @@ const converTime = minutes => {
 };
 
 
-const ListItem = ({title,duration,onOptionPress}) =>
+const ListItem = ({title,duration,onOptionPress,onAudioPress}) =>
 {
     return(
         <View style={styles.container}>
+        <TouchableWithoutFeedback onPress={onAudioPress}>
             <View style={styles.leftContainer}>
                 <Image style={styles.thumbnail} source={require('../resources/music-icon(3).png')}/>
                 <View style={styles.titleContainer}>
@@ -40,6 +41,7 @@ const ListItem = ({title,duration,onOptionPress}) =>
                 <Text style={styles.time} numberOfLines={1}>{converTime(duration)}</Text>
                 </View>
             </View>
+            </TouchableWithoutFeedback>
 
             <View style={styles.rightContainer}>
             <Icon name="ellipsis-v" size={20} color="#000" style={styles.iconStyle} onPress={onOptionPress} />
@@ -64,7 +66,7 @@ const styles=StyleSheet.create({
         paddingVertical:5,
     },
     rightContainer:{
-        flexBasis:'5%',
+        flexBasis:'7%',
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
@@ -92,11 +94,11 @@ const styles=StyleSheet.create({
         color:'black',
     },
     iconStyle:{
-        height:40,
-         width:40,
+        height:45,
+         width:45,
          position:'absolute',
          left:0,
-         padding:10,
+         padding:12,
         },
 
 });

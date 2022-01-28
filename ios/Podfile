@@ -18,6 +18,7 @@ target 'swismusic' do
 
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
+
   target 'swismusicTests' do
     inherit! :complete
     # Pods for testing

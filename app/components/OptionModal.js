@@ -1,6 +1,7 @@
 import React from 'react';
 import {View,StyleSheet,Text,Modal,StatusBar,TouchableWithoutFeedback} from 'react-native';
 
+
 export default function OptionModal({visible,onClose,currentItem,onPlayPress,onPlayListPress}) 
 {
     return(
